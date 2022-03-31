@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t vpryshchepa/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t nfrowner/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true vpryshchepa/react-test npm test
+  - docker run -e CI=true nfrowner/react-test npm test
 
 after_success:
-  - docker build -t vpryshchepa/multi-client ./client
-  - docker build -t vpryshchepa/multi-nginx ./nginx
-  - docker build -t vpryshchepa/multi-server ./server
-  - docker build -t vpryshchepa/multi-worker ./worker
+  - docker build -t nfrowner/multi-client ./client
+  - docker build -t nfrowner/multi-nginx ./nginx
+  - docker build -t nfrowner/multi-server ./server
+  - docker build -t nfrowner/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
 
-  - docker push vpryshchepa/multi-client
-  - docker push vpryshchepa/multi-nginx
-  - docker push vpryshchepa/multi-server
-  - docker push vpryshchepa/multi-worker
+  - docker push nfrowner/multi-client
+  - docker push nfrowner/multi-nginx
+  - docker push nfrowner/multi-server
+  - docker push nfrowner/multi-worker
